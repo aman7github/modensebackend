@@ -69,7 +69,7 @@ if(brand==undefined){
 
 try{
  
-    const data = await Womenmodel.find(customcategory&&custombrand).sort(customsort)
+    const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
   
   res.status(200).send({"msg":data})
 
