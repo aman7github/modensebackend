@@ -25,6 +25,7 @@ womenapp.get("/get",async(req,res)=>{
     const sort = req.query.sort
     const order = req.query.order
     const brand = req.query.brand
+    const page = req.query.page
    
     var customcategory;
   
@@ -63,13 +64,13 @@ if(brand==undefined){
     }
 }
 
-  console.log(sort,order,customsort,customcategory)
+  console.log(page)
 
 
 
 try{
  
-    const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
+    const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
   
   res.status(200).send({"msg":data})
 
