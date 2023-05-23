@@ -18,7 +18,7 @@ app.use("/user",userroute)
 app.use("/women",womenapp)
 app.use("/men",menapp)
 app.use("/wishlist",wishapp)
-app.use(middleware)
+
 app.use("/order",orderapp)
 
 
