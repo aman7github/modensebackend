@@ -73,7 +73,7 @@ try{
      
     const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
   
-  res.status(200).send({"msg":data, "totalItem":totaldata.length})
+  res.status(200).send({"msg":data})
 
 }catch(err){
     res.status(400).send({"msg":err.message})
