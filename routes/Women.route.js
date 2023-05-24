@@ -69,7 +69,7 @@ if(brand==undefined){
 
 
 try{
-    const totaldata = await Womenmodel.find()  
+    const totaldata = await Womenmodel.find({$and:[customcategory,custombrand]})  
     const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
   
   res.status(200).send({"msg":data, "totalItem":totaldata.length})
@@ -81,14 +81,20 @@ try{
 })
 
 
+ 
 womenapp.patch("/update/:id",async(req,res)=>{
-    const {id} = req.params
-try{
-const newdata = await Womenmodel.findByIdAndUpdate({_id:id},req.body)
- res.status(200).send({"msg":newdata})
-}catch(err){
-    res.status(400).send({"msg":err.message}) 
-}
+   const {id} = req.params
+ 
+   try{
+         await Womenmodel.findByIdAndUpdate({_id:id},req.body) 
+         res.status(200).send({"msg":"data updated"})
+
+   }catch(err){
+         res.status(400).send({"msg":err})
+   }
+
+
+
 })
 
 
@@ -99,7 +105,7 @@ try{
  await Womenmodel.findByIdAndDelete({_id:id})
  res.status(200).send({"msg":"data is deleted"})
 }catch(err){
-    res.status(200).send({"msg":err.message}) 
+    res.status(400).send({"msg":err.message}) 
 }
 })
 

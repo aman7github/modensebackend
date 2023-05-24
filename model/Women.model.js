@@ -5,7 +5,7 @@ const schema = mongoose.Schema({
 
     "Title": String,
     "Title_URL": String,
-     "arr":[String],
+    "arr":[String],
     "Image": String,
     "Name": String,
     "Sprice": String,
