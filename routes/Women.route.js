@@ -31,8 +31,7 @@ womenapp.get("/get",async(req,res)=>{
   
  if(category==undefined  ){
     customcategory={}
-  
- }else{
+ }else if (category!=undefined ){
     customcategory={
         "category":category
     }
@@ -59,7 +58,7 @@ var custombrand;
 
 if(brand==undefined ){
     custombrand={}
-}else{
+}else if(brand!=undefined ){
     custombrand={
         "Title":brand
     }
