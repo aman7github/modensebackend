@@ -29,12 +29,22 @@ womenapp.get("/get",async(req,res)=>{
    
     var customcategory;
   
- if(category==undefined  ){
-    customcategory={}
- }else{
+//  if(category==undefined  ){
+//     customcategory={}
+//  }else if(category=="undefined" || category=="" ){
+//     customcategory={}
+//  }else{
+//     customcategory={
+//         "category":category
+//     }
+// }
+
+if(category){
     customcategory={
-        "category":category
-    }
+            "category":category
+            }
+}else{
+    customcategory={}
 }
 
 
