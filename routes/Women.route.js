@@ -39,10 +39,12 @@ womenapp.get("/get",async(req,res)=>{
 //     }
 // }
 
-if(category){
+if(category==false){
+    customcategory={}
+}else if(category){
     customcategory={
-            "category":category
-            }
+      "category":category
+     }
 }else{
     customcategory={}
 }
@@ -66,12 +68,14 @@ var customsort;
 
 var custombrand;
 
-if(brand==undefined ){
+if(brand==false){
     custombrand={}
-}else{
+}else if(brand){
     custombrand={
         "Title":brand
     }
+}else{
+    custombrand={}
 }
 
   console.log(category,brand)
