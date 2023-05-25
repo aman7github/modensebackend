@@ -29,15 +29,7 @@ womenapp.get("/get",async(req,res)=>{
    
     var customcategory;
   
-//  if(category==undefined  ){
-//     customcategory={}
-//  }else if(category=="undefined" || category=="" ){
-//     customcategory={}
-//  }else{
-//     customcategory={
-//         "category":category
-//     }
-// }
+
 
 if(category==false){
     customcategory={}
@@ -83,8 +75,8 @@ if(brand==false){
 
 
 try{
-    const totaldata = await Womenmodel.find({$and:[customcategory,custombrand]})
-    const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
+    const totaldata = await Womenmodel.find(customcategory)
+    const data = await Womenmodel.find(customcategory).sort(customsort).skip((page-1)*12).limit(12)
   
   res.status(200).send({"msg":data,"totalPages":Math.ceil(totaldata.length/12)})
 
