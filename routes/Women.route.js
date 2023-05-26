@@ -31,9 +31,7 @@ womenapp.get("/get",async(req,res)=>{
   
 
 
-if(category==undefined || category==NaN || category==null){
-    customcategory={}
-}else if(category){
+if(category){
     customcategory={
       "category":category
      }
@@ -60,9 +58,7 @@ var customsort;
 
 var custombrand;
 
-if(brand==undefined || brand == NaN || brand==null){
-    custombrand={}
-}else if(brand){
+ if(brand){
     custombrand={
         "Title":brand
     }
@@ -81,6 +77,18 @@ try{
   
   res.status(200).send({"msg":data,"totalItems":totaldata.length})
 
+}catch(err){
+    res.status(400).send({"msg":err.message})
+}
+
+})
+
+womenapp.get("/get/:id",async(req,res)=>{
+    const {id} = req.params
+
+try{
+    const data = await Womenmodel.findById({_id:id})
+    res.status(200).send({"msg":data})
 }catch(err){
     res.status(400).send({"msg":err.message})
 }
