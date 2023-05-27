@@ -24,58 +24,52 @@ try{
 
 cartapp.get("/get",async(req,res)=>{
   
-    const category = req.query.category
-    const sort = req.query.sort
-    const order = req.query.order
-    const brand = req.query.brand
+//     const category = req.query.category
+//     const sort = req.query.sort
+//     const order = req.query.order
+//     const brand = req.query.brand
    
-    var customcategory;
+//     var customcategory;
   
- if(category==undefined){
-    customcategory={}
- }else{
-    customcategory={
-        "category":category
-    }
-}
+//  if(category==undefined){
+//     customcategory={}
+//  }else{
+//     customcategory={
+//         "category":category
+//     }
+// }
 
 
-var customsort;
+// var customsort;
 
-  if(sort==undefined){
-     customsort={}
-  }else if(sort=="price"){
-    if(order=="asc"){
-    customsort={
-        "price":+1
-    }
-  }else if(order=="desc"){
-    customsort={
-        "price":-1
-    }
-  }
-}
+//   if(sort==undefined){
+//      customsort={}
+//   }else if(sort=="price"){
+//     if(order=="asc"){
+//     customsort={
+//         "price":+1
+//     }
+//   }else if(order=="desc"){
+//     customsort={
+//         "price":-1
+//     }
+//   }
+// }
 
-var custombrand;
+// var custombrand;
 
-if(brand==undefined){
-    custombrand={}
-}else{
-    custombrand={
-        "Title":brand
-    }
-}
-
-  console.log(sort,order,customsort,customcategory)
-
+// if(brand==undefined){
+//     custombrand={}
+// }else{
+//     custombrand={
+//         "Title":brand
+//     }
+// }
 
 
 try{
- 
-    const data = await Cartmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
-  
+    const data = await Cartmodel.find()
     res.status(200).send({"msg":data})
-
 }catch(err){
     res.status(400).send({"msg":err.message})
 }
@@ -88,9 +82,10 @@ cartapp.delete("/delete/:id",async(req,res)=>{
 try{
   //await Cartmodel.deleteMany()  // if you want delete all data at once
  await Cartmodel.findByIdAndDelete({_id:id})
- res.status(200).send({"msg":"data is deleted"})
+ const data = await Cartmodel.find()
+ res.status(200).send({"msg":"data is deleted",'data':data})
 }catch(err){
-    res.status(200).send({"msg":err.message}) 
+    res.status(400).send({"msg":err.message}) 
 }
 })
 
