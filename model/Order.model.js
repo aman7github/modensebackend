@@ -26,7 +26,9 @@ const Ordermodel = mongoose.model("userorderdata",schema)
 
 const WishListmodel = mongoose.model("usewishlistdata",schema)
 
+const Cartmodel = mongoose.model("cartdata",schema)
+
 
 module.exports={
-Ordermodel,WishListmodel
+Ordermodel,WishListmodel,Cartmodel
 }
