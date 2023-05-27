@@ -1,15 +1,15 @@
 
 const express = require("express")
-const { Wishlistmodel } = require("../model/Women.model")
+const { WishListmodel } = require("../model/Order.model")
 const wishapp = express.Router()
 
 wishapp.post("/add",async(req,res)=>{
 
 try{
 
- const women = new Wishlistmodel(req.body)
+ const women = new WishListmodel(req.body)
  await women.save()
- //await Wishlistmodel.insertMany(req.body)
+ //await WishListmodel.insertMany(req.body)
  res.status(200).send({"msg":"new women data is added"})
 
 
@@ -69,7 +69,7 @@ if(brand==undefined){
 
 try{
  
-    const data = await Wishlistmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
+    const data = await WishListmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
   
   res.status(200).send({"msg":data})
 
@@ -83,8 +83,8 @@ try{
 wishapp.delete("/delete/:id",async(req,res)=>{
     const {id} = req.params
 try{
-  //await Wishlistmodel.deleteMany()  // if you want delete all data at once
- await Wishlistmodel.findByIdAndDelete({_id:id})
+  //await WishListmodel.deleteMany()  // if you want delete all data at once
+ await WishListmodel.findByIdAndDelete({_id:id})
  res.status(200).send({"msg":"data is deleted"})
 }catch(err){
     res.status(200).send({"msg":err.message}) 

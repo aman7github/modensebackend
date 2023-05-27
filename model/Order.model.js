@@ -14,6 +14,8 @@ const schema = mongoose.Schema({
     "prdstores": String,
     "category":String,
     "userID":String,
+    "Size":String,
+    "Quantity":Number
  
 
 },{
@@ -22,7 +24,9 @@ const schema = mongoose.Schema({
 
 const Ordermodel = mongoose.model("userorderdata",schema)
 
+const WishListmodel = mongoose.model("usewishlistdata",schema)
+
 
 module.exports={
-Ordermodel
+Ordermodel,WishListmodel
 }
