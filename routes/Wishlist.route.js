@@ -6,16 +6,17 @@ const wishapp = express.Router()
 wishapp.post("/add",async(req,res)=>{
 
 try{
-
+ 
  const women = new WishListmodel(req.body)
  await women.save()
  //await WishListmodel.insertMany(req.body)
- res.status(200).send({"msg":"new women data is added"})
+ res.status(200).send({"msg":"Item is added to Cart"})
 
 
 }catch(err){
-    res.status(400).send({"msg":err.message})
+    res.status(400).send({"msg":"Item is already added to Cart"})
 }
+
 })
 
 
@@ -71,7 +72,7 @@ try{
  
     const data = await WishListmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
   
-  res.status(200).send({"msg":data})
+    res.status(200).send({"msg":data})
 
 }catch(err){
     res.status(400).send({"msg":err.message})
