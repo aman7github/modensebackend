@@ -10,7 +10,8 @@ try{
  const women = new WishListmodel(req.body)
  await women.save()
  //await WishListmodel.insertMany(req.body)
- res.status(200).send({"msg":"Item is added to WihsList"})
+  const data = await WishListmodel.find()
+ res.status(200).send({"msg":"Item is added to WihsList","data":data})
 
 
 }catch(err){
