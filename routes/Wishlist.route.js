@@ -23,55 +23,10 @@ try{
 
 wishapp.get("/get",async(req,res)=>{
   
-    const category = req.query.category
-    const sort = req.query.sort
-    const order = req.query.order
-    const brand = req.query.brand
    
-    var customcategory;
-  
- if(category==undefined){
-    customcategory={}
- }else{
-    customcategory={
-        "category":category
-    }
-}
-
-
-var customsort;
-
-  if(sort==undefined){
-     customsort={}
-  }else if(sort=="price"){
-    if(order=="asc"){
-    customsort={
-        "price":+1
-    }
-  }else if(order=="desc"){
-    customsort={
-        "price":-1
-    }
-  }
-}
-
-var custombrand;
-
-if(brand==undefined){
-    custombrand={}
-}else{
-    custombrand={
-        "Title":brand
-    }
-}
-
-  console.log(sort,order,customsort,customcategory)
-
-
-
 try{
  
-    const data = await WishListmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
+    const data = await WishListmodel.find()
   
     res.status(200).send({"msg":data})
 
