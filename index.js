@@ -10,6 +10,7 @@ const { wishapp } = require("./routes/Wishlist.route")
 const { orderapp } = require("./routes/Order.route")
 const { middleware } = require("./middleware/middleware")
 const { cartapp } = require("./routes/Cart.route")
+const { addressroute } = require("./routes/Address.route")
 
 
 const app = express()
@@ -21,8 +22,11 @@ app.use("/men",menapp)
 app.use("/wishlist",wishapp)
 app.use("/cart",cartapp)
 
+
 app.use(middleware)
 app.use("/order",orderapp)
+app.use("/address",addressroute)
+
 
 
 
