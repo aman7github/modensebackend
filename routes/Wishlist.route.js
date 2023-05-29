@@ -22,12 +22,10 @@ try{
 
 
 wishapp.get("/get",async(req,res)=>{
-  
-   
+ 
 try{
  
     const data = await WishListmodel.find()
-  
     res.status(200).send({"msg":data})
 
 }catch(err){
@@ -44,7 +42,7 @@ try{
  await WishListmodel.findByIdAndDelete({_id:id})
  res.status(200).send({"msg":"data is deleted"})
 }catch(err){
-    res.status(200).send({"msg":err.message}) 
+    res.status(400).send({"msg":err.message}) 
 }
 })
 

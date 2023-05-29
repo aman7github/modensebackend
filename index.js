@@ -30,12 +30,6 @@ app.use("/address",addressroute)
 
 
 
-
-
-
-
-
-
 app.listen(process.env.port,async()=>{
 
 try{
