@@ -76,6 +76,18 @@ try{
 
 })
 
+menapp.get("/get/:id",async(req,res)=>{
+    const {id} = req.params
+
+try{
+    const data = await Menmodel.findById({_id:id})
+    res.status(200).send({"msg":data})
+}catch(err){
+    res.status(400).send({"msg":err.message})
+}
+
+})
+
 
 menapp.patch("/update/:id",async(req,res)=>{
     const {id} = req.params
