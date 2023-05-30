@@ -8,9 +8,9 @@ menapp.post("/add",async(req,res)=>{
 
 try{
 
-//  const women = new Menmodel(req.body)
-//  await women.save()
- await Menmodel.insertMany(req.body)
+ const women = new Menmodel(req.body)
+ await women.save()
+ //await Menmodel.insertMany(req.body)
  res.status(200).send({"msg":"new women data is added"})
 
 
@@ -71,8 +71,8 @@ if(brand==undefined){
 try{
  
     const data = await Menmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
-  
-  res.status(200).send({"msg":data})
+    const totaldata = await Menmodel.find({$and:[customcategory,custombrand]})
+    res.status(200).send({"msg":data,"totalItems":totaldata.length})
 
 }catch(err){
     res.status(400).send({"msg":err.message})
