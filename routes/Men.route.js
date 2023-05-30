@@ -1,6 +1,6 @@
 
 const express = require("express")
-const { Menmodel } = require("../model/Women.model")
+const { Menmodel } = require("../model/Mens.model")
 
 const menapp = express.Router()
 
@@ -8,9 +8,9 @@ menapp.post("/add",async(req,res)=>{
 
 try{
 
- const women = new Menmodel(req.body)
- await women.save()
- //await Menmodel.insertMany(req.body)
+//  const women = new Menmodel(req.body)
+//  await women.save()
+ await Menmodel.insertMany(req.body)
  res.status(200).send({"msg":"new women data is added"})
 
 

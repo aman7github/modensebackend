@@ -24,7 +24,6 @@ try{
 wishapp.get("/get",async(req,res)=>{
  
 try{
- 
     const data = await WishListmodel.find()
     res.status(200).send({"msg":data})
 
