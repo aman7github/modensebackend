@@ -26,20 +26,19 @@ menapp.get("/get",async(req,res)=>{
     const sort = req.query.sort
     const order = req.query.order
     const brand = req.query.brand
-   
+    const page = req.query.page
     var customcategory;
   
- if(category==undefined){
-    customcategory={}
- }else{
+if(category){
     customcategory={
-        "category":category
-    }
+      "category":category
+     }
+}else{
+    customcategory={}
 }
 
 
 var customsort;
-
   if(sort==undefined){
      customsort={}
   }else if(sort=="price"){
@@ -55,22 +54,19 @@ var customsort;
 }
 
 var custombrand;
-
-if(brand==undefined){
-    custombrand={}
-}else{
+ if(brand){
     custombrand={
         "Title":brand
     }
+}else{
+    custombrand={}
 }
 
   console.log(sort,order,customsort,customcategory)
 
-
-
 try{
  
-    const data = await Menmodel.find({$and:[customcategory,custombrand]}).sort(customsort)
+    const data = await Menmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
     const totaldata = await Menmodel.find({$and:[customcategory,custombrand]})
     res.status(200).send({"msg":data,"totalItems":totaldata.length})
 
