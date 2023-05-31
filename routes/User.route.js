@@ -14,7 +14,6 @@ let count = 0
   
 console.log(req.body)
 try{
-
 const user = await Usermodel.find({email})
 if(user.length!=0){
     count++
@@ -64,7 +63,7 @@ if(user.length!=0){
 
  }else{
 
-    res.status(400).send({"msg":"your password dosen't contain any captical letter "}) 
+    res.status(400).send({"msg":"your password should contain atleast one captical letter "}) 
  }
 
 }else{
@@ -77,6 +76,30 @@ if(user.length!=0){
 
 })
 
+
+userroute.get("/get",async(req,res)=>{
+try{
+    const users = await Usermodel.find()
+    res.status(200).send({"msg":users})
+
+}catch(err){
+    res.status(400).send({"msg":err.message})
+
+}
+})
+
+userroute.delete("/delete/:id",async(req,res)=>{
+    const {id} = req.params
+    try{
+        await Usermodel.findByIdAndDelete({_id:id})
+        res.status(200).send({"msg":"user is removed"})
+    
+    }catch(err){
+        res.status(400).send({"msg":err.message})
+    
+    }
+    })
+    
 
 
  userroute.post("/login",async(req,res)=>{
