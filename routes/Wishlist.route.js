@@ -2,6 +2,7 @@
 const express = require("express")
 const { WishListmodel } = require("../model/Order.model")
 const wishapp = express.Router()
+const jwt = require("jsonwebtoken")
 
 wishapp.post("/add",async(req,res)=>{
 
@@ -22,11 +23,17 @@ try{
 
 
 wishapp.get("/get",async(req,res)=>{
+    const token = req.headers.authorization
  
 try{
-    const data = await WishListmodel.find()
-    res.status(200).send({"msg":data})
+    if(token){
+       const decode =  jwt.verify(token,"batman")
+       if(decode){
+            const data = await WishListmodel.find({"userID":decode.userID})
+             res.status(200).send({"msg":data})
 
+       }
+    }
 }catch(err){
     res.status(400).send({"msg":err.message})
 }
