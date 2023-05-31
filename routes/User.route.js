@@ -113,7 +113,7 @@ userroute.delete("/delete/:id",async(req,res)=>{
             if(result){
                 res.status(200).send({"msg":"user logged in", "token": jwt.sign({"userID":user[0]._id}, "batman") })
             }else{
-                res.status(400).send({"msg":err})
+                res.status(400).send({"msg":err.message})
             }
            
         })
