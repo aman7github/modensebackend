@@ -7,11 +7,20 @@ const addressroute = express.Router()
 
 
 addressroute.post("/add",async(req,res)=>{
-  try{
-  const newAddress = new AddressModel(req.body)
-  await newAddress.save()
-  res.status(200).send({"msg":"new address is added"})
+    const token = req.headers.authorization
 
+  try{
+    if(token){
+        const decode = jwt.verify(token,"batman")
+
+         if(decode){
+             const newAddress = new AddressModel(req.body)
+             await newAddress.save()
+             const address = await AddressModel.find({"userID":decode.userID})
+             res.status(200).send({"msg":"new address is added","data":address})
+  
+           }
+         }
   }catch(err){
     res.status(400).send({"msg":err.message})
 
