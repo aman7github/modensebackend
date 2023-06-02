@@ -1,6 +1,4 @@
 
-
-
 const express = require("express")
 const { Cartmodel } = require("../model/Order.model")
 const cartapp = express.Router()
