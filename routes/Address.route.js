@@ -28,7 +28,6 @@ addressroute.post("/add",async(req,res)=>{
 
 })
 
-
 addressroute.get("/get",async(req,res)=>{
      const token = req.headers.authorization
      try{
