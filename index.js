@@ -11,7 +11,7 @@ const { orderapp } = require("./routes/Order.route")
 const { middleware } = require("./middleware/middleware")
 const { cartapp } = require("./routes/Cart.route")
 const { addressroute } = require("./routes/Address.route")
-var cors = require('cors')
+const cors = require('cors')
 
 const app = express()
 app.use(express.json())
