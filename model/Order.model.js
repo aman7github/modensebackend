@@ -23,9 +23,7 @@ const schema = mongoose.Schema({
         "mobile":Number,
          "name":String,
          "pincode":String,
-         "street":String,
-         "userID":String,
-         "_id":String
+         "street":String
     }
  
 
