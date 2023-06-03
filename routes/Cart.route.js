@@ -69,6 +69,25 @@ try{
 }
 })
 
+cartapp.delete("/delete",async(req,res)=>{
+    const token = req.headers.authorization
+try{
+    if(token){
+        const decode = jwt.verify(token,"batman")
+        if(decode){
+           await Cartmodel.deleteMany()  // if you want delete all data at once
+           const data = await Cartmodel.find({"userID":decode.userID})
+           res.status(200).send({"msg":"data is deleted",'data':data})
+
+        }
+    }else{
+        res.status(400).send({"msg":"login first"}) 
+    }
+}catch(err){
+    res.status(400).send({"msg":err.message}) 
+}
+})
+
 
 
 module.exports={

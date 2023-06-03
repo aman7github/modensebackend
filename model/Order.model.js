@@ -16,6 +16,7 @@ const schema = mongoose.Schema({
     "userID":String,
     "Size":String,
     "Quantity":Number,
+    "Date":String,
     "Address":{
         "building":String,
         "city":String,
