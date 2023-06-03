@@ -15,7 +15,8 @@ const schema = mongoose.Schema({
     "category":String,
     "userID":String,
     "Size":String,
-    "Quantity":Number
+    "Quantity":Number,
+    "Address":Object
  
 
 },{
