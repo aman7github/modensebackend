@@ -16,7 +16,17 @@ const schema = mongoose.Schema({
     "userID":String,
     "Size":String,
     "Quantity":Number,
-    "Address":Object
+    "Address":{
+        "building":String,
+        "city":String,
+        "landmark":String,
+        "mobile":Number,
+         "name":String,
+         "pincode":String,
+         "street":String,
+         "userID":String,
+         "_id":String
+    }
  
 
 },{
