@@ -3,7 +3,7 @@ const express = require("express")
 require("dotenv").config()
 const { connection } = require("./db/db")
 const { userroute } = require("./routes/User.route")
-const cors = require("cors")
+
 const { womenapp } = require("./routes/Women.route")
 const { menapp } = require("./routes/Men.route")
 const { wishapp } = require("./routes/Wishlist.route")
@@ -11,7 +11,7 @@ const { orderapp } = require("./routes/Order.route")
 const { middleware } = require("./middleware/middleware")
 const { cartapp } = require("./routes/Cart.route")
 const { addressroute } = require("./routes/Address.route")
-
+var cors = require('cors')
 
 const app = express()
 app.use(express.json())
