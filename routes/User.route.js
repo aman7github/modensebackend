@@ -111,7 +111,7 @@ userroute.delete("/delete/:id",async(req,res)=>{
         bcrypt.compare(password,user[0].password,async(err,result)=>{
           
             if(result){
-                res.status(200).send({"msg":"user logged in","name":user[0].name, "token": jwt.sign({"userID":user[0]._id}, "batman") })
+                res.status(200).send({"msg":`Welcome.. ${user[0].name} you are logged In `,"name":user[0].name, "token": jwt.sign({"userID":user[0]._id}, "batman") })
             }else{
                 res.status(400).send({"msg":err.message})
             }

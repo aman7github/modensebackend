@@ -12,11 +12,14 @@ try{
         const decoded = jwt.verify(token, "batman")
         console.log(decoded)
        if(decoded){
-//  const women = new Ordermodel(req.body)
-//  await women.save()
- await Ordermodel.insertMany(req.body)
- const data = await Ordermodel.find({"userID":decoded.userID})
- res.status(200).send({"msg":"new women data is added","data":data})
+        if(req.body.length==1){
+            const women = new Ordermodel(req.body)
+            await women.save()
+        }else if(req.body.length>1){
+            await Ordermodel.insertMany(req.body)
+        }
+        const data = await Ordermodel.find({"userID":decoded.userID})
+        res.status(200).send({"msg":"new women data is added","data":data})
 
        }}
 }catch(err){
