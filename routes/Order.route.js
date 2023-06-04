@@ -7,19 +7,24 @@ const jwt = require("jsonwebtoken")
 
 orderapp.post("/add",async(req,res)=>{
     const token = req.headers.authorization
+    console.log(req.body.length)
 try{
     if(token){
         const decoded = jwt.verify(token, "batman")
         console.log(decoded)
        if(decoded){
         if(req.body.length==1){
-            const women = new Ordermodel(req.body)
-            await women.save()
+             let postdata = req.body[0]
+             const newdata = new Ordermodel(postdata)
+             await newdata.save()
+            const data = await Ordermodel.find({"userID":decoded.userID})
+            res.status(200).send({"msg":"new data is added","data":data})
         }else if(req.body.length>1){
             await Ordermodel.insertMany(req.body)
+            const data = await Ordermodel.find({"userID":decoded.userID})
+            res.status(200).send({"msg":"new data is added","data":data})
         }
-        const data = await Ordermodel.find({"userID":decoded.userID})
-        res.status(200).send({"msg":"new women data is added","data":data})
+        
 
        }}
 }catch(err){
