@@ -19,7 +19,6 @@ if(user.length!=0){
     count++
 }
 
-
  if(email.includes("@")==true ){
 
   if(/[A-Z]/.test(password) ){
@@ -100,7 +99,6 @@ userroute.delete("/delete/:id",async(req,res)=>{
     }
     })
     
-
 
  userroute.post("/login",async(req,res)=>{
   
