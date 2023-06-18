@@ -101,7 +101,8 @@ womenapp.patch("/update/:id",async(req,res)=>{
    const {id} = req.params
  
    try{
-         const updatedData = await Womenmodel.findByIdAndUpdate({_id:id},req.body) 
+          await Womenmodel.findByIdAndUpdate({_id:id},req.body) 
+          const updatedData = await Womenmodel.find()
          res.status(200).send({"msg":"data updated",data:updatedData})
 
    }catch(err){

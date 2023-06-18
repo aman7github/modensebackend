@@ -92,7 +92,8 @@ try{
 menapp.patch("/update/:id",async(req,res)=>{
     const {id} = req.params
 try{
-const newdata = await Menmodel.findByIdAndUpdate({_id:id},req.body)
+ await Menmodel.findByIdAndUpdate({_id:id},req.body)
+ const newdata = await Menmodel.find()
  res.status(200).send({"msg":"data updated", data:newdata})
 }catch(err){
     res.status(400).send({"msg":err.message}) 
