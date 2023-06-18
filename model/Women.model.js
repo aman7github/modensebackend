@@ -4,14 +4,13 @@ const mongoose = require("mongoose")
 const schema = mongoose.Schema({
 
     "Title": String,
-    "Title_URL": String,
     "arr":[String],
     "Image": String,
     "Name": String,
     "Sprice": String,
     "price": Number,
-    "prdstores": String,
     "category":String,
+    "status":Boolean
  
 
 },{
@@ -20,11 +19,13 @@ const schema = mongoose.Schema({
 
 const Womenmodel = mongoose.model("womendata",schema)
 
+const Allmodel = mongoose.model("Alldata",schema)
+
 //const Menmodel = mongoose.model("mendata",schema)
 
 
 
 
 module.exports={
-    Womenmodel
+    Womenmodel ,Allmodel
 }

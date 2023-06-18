@@ -10,6 +10,7 @@ const schema = mongoose.Schema({
     "Sprice": String,
     "price": Number,
     "category":String,
+    "status":Boolean
  
 
 },{

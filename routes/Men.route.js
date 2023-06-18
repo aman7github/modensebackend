@@ -93,17 +93,28 @@ menapp.patch("/update/:id",async(req,res)=>{
     const {id} = req.params
 try{
 const newdata = await Menmodel.findByIdAndUpdate({_id:id},req.body)
- res.status(200).send({"msg":newdata})
+ res.status(200).send({"msg":"data updated", data:newdata})
 }catch(err){
     res.status(400).send({"msg":err.message}) 
 }
 })
 
+ // <------------------------------if you want delete all data at once----------------->
+
+menapp.delete("/delete",async(req,res)=>{ 
+try{
+  await Menmodel.deleteMany() 
+ res.status(200).send({"msg":"data is deleted"})
+}catch(err){
+    res.status(200).send({"msg":err.message}) 
+}
+})
+
+ // <------------------------------if you want delete single data ----------------->
 
 menapp.delete("/delete/:id",async(req,res)=>{
     const {id} = req.params
 try{
-  //await Menmodel.deleteMany()  // if you want delete all data at once
  await Menmodel.findByIdAndDelete({_id:id})
  res.status(200).send({"msg":"data is deleted"})
 }catch(err){

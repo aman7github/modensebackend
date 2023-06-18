@@ -1,16 +1,17 @@
 
-const express = require("express")
-const { Womenmodel } = require("../model/Women.model")
-const womenapp = express.Router()
 
-womenapp.post("/add",async(req,res)=>{
+const express = require("express")
+const { Allmodel } = require("../model/Women.model")
+const allapp = express.Router()
+
+allapp.post("/add",async(req,res)=>{
 
 try{
 
-//  const women = new Womenmodel(req.body)
-//  await women.save()
- await Womenmodel.insertMany(req.body)
- res.status(200).send({"msg":"new women data is added"})
+//  const data = new Allmodel(req.body)      // to add one data at a time
+//  await data.save()
+ await Allmodel.insertMany(req.body)         // to add more than one data 
+ res.status(200).send({"msg":"new  data is added"})
 
 
 }catch(err){
@@ -19,7 +20,7 @@ try{
 })
 
 
-womenapp.get("/get",async(req,res)=>{
+allapp.get("/get",async(req,res)=>{
   
     const category = req.query.category
     const sort = req.query.sort
@@ -72,8 +73,8 @@ var custombrand;
 
 try{
 
-    const totaldata = await Womenmodel.find({$and:[customcategory,custombrand]})
-    const data = await Womenmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
+    const totaldata = await Allmodel.find({$and:[customcategory,custombrand]})
+    const data = await Allmodel.find({$and:[customcategory,custombrand]}).sort(customsort).skip((page-1)*12).limit(12)
   
   res.status(200).send({"msg":data,"totalItems":totaldata.length})
 
@@ -83,11 +84,14 @@ try{
 
 })
 
-womenapp.get("/get/:id",async(req,res)=>{
+
+
+
+allapp.get("/get/:id",async(req,res)=>{
     const {id} = req.params
 
 try{
-    const data = await Womenmodel.findById({_id:id})
+    const data = await Allmodel.findById({_id:id})
     res.status(200).send({"msg":data})
 }catch(err){
     res.status(400).send({"msg":err.message})
@@ -97,12 +101,12 @@ try{
 
 
  
-womenapp.patch("/update/:id",async(req,res)=>{
+allapp.patch("/update/:id",async(req,res)=>{
    const {id} = req.params
  
    try{
-         const updatedData = await Womenmodel.findByIdAndUpdate({_id:id},req.body) 
-         res.status(200).send({"msg":"data updated",data:updatedData})
+         await Allmodel.findByIdAndUpdate({_id:id},req.body) 
+         res.status(200).send({"msg":"data updated"})
 
    }catch(err){
          res.status(400).send({"msg":err})
@@ -112,33 +116,31 @@ womenapp.patch("/update/:id",async(req,res)=>{
 
 })
 
+allapp.delete("/delete",async(req,res)=>{
+ 
+    try{
+      await Allmodel.deleteMany()  // if you want delete all data at once
+     res.status(200).send({"msg":"all data is deleted"})
+    }catch(err){
+        res.status(400).send({"msg":err.message}) 
+    }
+    })
 
-//<---------------- if you want delete all data at once--------------------->
 
-womenapp.delete("/delete",async(req,res)=>{
-   
-try{
- await Womenmodel.deleteMany()  
- res.status(200).send({"msg":"data is deleted"})
-}catch(err){
-    res.status(400).send({"msg":err.message}) 
-}
-})
-
-//<---------------- if you want delete one data at a time--------------------->
-
-womenapp.delete("/delete/:id",async(req,res)=>{
+allapp.delete("/delete/:id",async(req,res)=>{
     const {id} = req.params
 try{
- await Womenmodel.findByIdAndDelete({_id:id})
+ await Allmodel.findByIdAndDelete({_id:id})
  res.status(200).send({"msg":"data is deleted"})
 }catch(err){
     res.status(400).send({"msg":err.message}) 
 }
 })
+
+
 
 
 
 module.exports={
-    womenapp
+    allapp
 }

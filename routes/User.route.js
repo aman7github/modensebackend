@@ -99,9 +99,7 @@ userroute.delete("/delete/:id",async(req,res)=>{
     }
     })
     
-
  userroute.post("/login",async(req,res)=>{
-  
     const{email,name,password} = req.body
 
     try{
