@@ -17,6 +17,7 @@ const schema = mongoose.Schema({
     "Size":String,
     "Quantity":Number,
     "Date":String,
+    "gender":String,
     "Address":{
         "building":String,
         "city":String,
